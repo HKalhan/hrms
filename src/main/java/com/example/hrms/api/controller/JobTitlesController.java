@@ -1,8 +1,8 @@
 package com.example.hrms.api.controller;
 
 import com.example.hrms.business.abstracts.JobTitleService;
-import com.example.hrms.core.DataResult;
-import com.example.hrms.core.Result;
+import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobTitle;
 import org.springframework.web.bind.annotation.*;
 

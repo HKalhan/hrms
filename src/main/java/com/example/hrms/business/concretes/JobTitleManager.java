@@ -1,10 +1,11 @@
 package com.example.hrms.business.concretes;
 
 import com.example.hrms.business.abstracts.JobTitleService;
-import com.example.hrms.core.DataResult;
-import com.example.hrms.core.Result;
-import com.example.hrms.core.SuccessDataResult;
-import com.example.hrms.core.SuccessResult;
+import com.example.hrms.business.abstracts.UserService;
+import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.core.utilities.results.Result;
+import com.example.hrms.core.utilities.results.SuccessDataResult;
+import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.JobTitleDao;
 import com.example.hrms.entities.concretes.JobTitle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class JobTitleManager implements JobTitleService {
     @Autowired
     public JobTitleManager(JobTitleDao jobTitleDao) {
         this.jobTitleDao = jobTitleDao;
+
     }
 
     @Override

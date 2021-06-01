@@ -1,6 +1,8 @@
-package com.example.hrms.core;
+package com.example.hrms.core.utilities.results;
 
-public class DataResult<T> extends Result{
+import com.example.hrms.core.utilities.results.Result;
+
+public class DataResult<T> extends Result {
 
     private T data;
     public DataResult(T data,boolean success, String message) {

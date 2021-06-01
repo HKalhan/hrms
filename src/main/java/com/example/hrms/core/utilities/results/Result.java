@@ -1,4 +1,4 @@
-package com.example.hrms.core;
+package com.example.hrms.core.utilities.results;
 
 public class Result {
     private boolean success;

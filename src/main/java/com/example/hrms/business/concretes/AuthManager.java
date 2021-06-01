@@ -34,7 +34,7 @@ public class AuthManager implements AuthService {
     public DataResult<Candidate> registerCandidate(Candidate candidate, String confirmPassword) {
         if (!this.checkMernisVerification(candidate)) {
             return new ErrorDataResult<Candidate>("Kimlik doğrulaması hatalı");
-        }else if (!isEmailValidation(candidate.getEmail())){
+        }if (!isEmailValidation(candidate.getEmail())){
             return new ErrorDataResult<Candidate>("lütfen doğru email adresi ile giriş yapın");}
 
 

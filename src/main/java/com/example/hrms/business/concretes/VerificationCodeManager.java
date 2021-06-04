@@ -21,11 +21,11 @@ public class VerificationCodeManager implements VerificationCodeService {
         this.verificationDao = verificationDao;
     }
     @Override
-    public Result addUser(int userId) {
+    public Result add(int id) {
         Verification verification=new Verification();
         verification.setVerified(true);
         verification.setVerificationCode(this.createCode());
-        verification.setUserId(userId);
+        verification.setId(id);
 
        this.verificationDao.save(verification);
        return new SuccessResult();

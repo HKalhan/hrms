@@ -9,10 +9,11 @@ import java.util.Date;
 @Service
 public class MernisServiceAdapter implements MernisService {
 
-
     @Override
-    public boolean checkIfRealPerson(String identificationNumber, String firstName, String lastName, Date birthDate) {
+    public boolean checkIfRealPerson(String identificationNumber, String firstName, String lastName, int birthDate) {
+
         return true;
-    }
+      }
+
 }
 

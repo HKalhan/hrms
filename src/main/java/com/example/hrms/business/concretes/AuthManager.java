@@ -29,23 +29,25 @@ public class AuthManager implements AuthService {
        this.verificationCodeService=verificationCodeService;
     }
 
-
     @Override
-    public DataResult<Candidate> registerCandidate(Candidate candidate, String confirmPassword) {
-        if (!this.checkMernisVerification(candidate)) {
+    public DataResult<Candidate> registerCandidate(Candidate candidate , String confirmPassword) {
+      if (this.checkMernisVerification(candidate.getIdentificationNumber(),candidate.getFirstName()
+        ,candidate.getLastName(),candidate.getBirthDate().getYear())==false)
+       {
             return new ErrorDataResult<Candidate>("Kimlik doğrulaması hatalı");
-        }if (!isEmailValidation(candidate.getEmail())){
-            return new ErrorDataResult<Candidate>("lütfen doğru email adresi ile giriş yapın");}
+       }
 
-
+      if (!isEmailValidation(candidate.getEmail())){
+            return new ErrorDataResult<Candidate>("lütfen doğru email adresi ile giriş yapın");
+      }
         if (this.checkEqualpassword(candidate.getPassword(), confirmPassword).isSuccess()) {
             this.candidateService.add(candidate);
-            this.verificationCodeService.addUser(candidate.getId());
-            this.verificationService.verifyByCode(candidate.getEmail(),this.verificationCodeService.createCode());
-            return new SuccessDataResult<Candidate>( "Kayıt işlemi gerçekleşti");
+           //this.verificationCodeService.add(candidate.getId());
+           this.verificationService.verifyByCode(candidate.getEmail(), this.verificationCodeService.createCode());
+            return new SuccessDataResult<Candidate>("Kayıt işlemi gerçekleşti");
         }
         return new ErrorDataResult<Candidate>("Kayıt işlemi başarısız");
-    }
+        }
 
     @Override
     public DataResult<Employer> registerEmployer(Employer employer, String confirmPassword) {
@@ -73,11 +75,11 @@ public class AuthManager implements AuthService {
     }
 
 
-    private boolean checkMernisVerification(Candidate candidate) {
-        boolean result = this.mernisService.checkIfRealPerson(candidate.getIdentificationNumber(),
-                candidate.getFirstName(), candidate.getLastName(), candidate.getBirthDate());
-        return result;
-    }
+    private boolean checkMernisVerification(String identificationNumber, String firstName, String lastName, int birthDate) {
+        if (mernisService.checkIfRealPerson(identificationNumber,firstName,lastName,birthDate)){
+            return true; }
+        return false;
+        }
 
     public static boolean isEmailValidation(String email) {
         final Pattern EMAIL_REGEX = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);

@@ -2,11 +2,10 @@ package com.example.hrms.entities.concretes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "employees")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@PrimaryKeyJoinColumn(name = "id")
 public class Employee extends User {
     @Column(name = "first_name")
     private String firstName;

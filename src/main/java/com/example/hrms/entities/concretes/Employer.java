@@ -1,20 +1,19 @@
 package com.example.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "employer")
-@EqualsAndHashCode(callSuper = false)
+@Table(name = "employers")
+@PrimaryKeyJoinColumn(name = "id")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
 public class Employer extends  User{
     @Column(name = "company_name")
     private String companyName;
@@ -24,4 +23,7 @@ public class Employer extends  User{
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "employer")
+    private List<JobAdvert> jobAdverts;
 }

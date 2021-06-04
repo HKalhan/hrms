@@ -6,6 +6,6 @@ import java.util.Date;
 
 
 public interface MernisService {
-    boolean checkIfRealPerson(String identificationNumber, String firstName, String lastName, Date birthDate);
+    boolean checkIfRealPerson(String identificationNumber, String firstName, String lastName, int birthDate);
 
 }

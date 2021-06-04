@@ -23,13 +23,13 @@ public class CandidateManager implements CandidateService {
 
     @Override
     public Result add(Candidate candidate) {
-        if ((this.userService.checkEmail(candidate.getEmail()).getData() ==null) &&
-                (this.checkIdIsExist(candidate.getIdentificationNumber()).getData() == null)) {
-            this.candidateDao.save(candidate);
-            return  new SuccessResult(" iş arayan eklendi");
+        if ((this.userService.checkEmail(candidate.getEmail()).getData() !=null) &&
+                (this.checkIdIsExist(candidate.getIdentificationNumber()).getData() != null)) {
+            return  new ErrorResult("Daha önce kayıtlı bir e-posta veya tcno var ise kayıt gerçekleşmez");
         }
         this.candidateDao.save(candidate);
-        return  new ErrorResult("Daha önce kayıtlı bir e-posta veya tcno var ise kayıt gerçekleşmez");
+        return  new SuccessResult(" iş arayan eklendi");
+
     }
 
     @Override

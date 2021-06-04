@@ -25,7 +25,7 @@ public class VerificationCodeManager implements VerificationCodeService {
         Verification verification=new Verification();
         verification.setVerified(true);
         verification.setVerificationCode(this.createCode());
-        verification.setId(id);
+        verification.setUserId(id);
 
        this.verificationDao.save(verification);
        return new SuccessResult();

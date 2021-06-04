@@ -42,8 +42,9 @@ public class AuthManager implements AuthService {
       }
         if (this.checkEqualpassword(candidate.getPassword(), confirmPassword).isSuccess()) {
             this.candidateService.add(candidate);
-           //this.verificationCodeService.add(candidate.getId());
-           this.verificationService.verifyByCode(candidate.getEmail(), this.verificationCodeService.createCode());
+            this.verificationCodeService.add(candidate.getId());
+            this.verificationService.verifyByCode(candidate.getEmail(), this.verificationCodeService.createCode());
+
             return new SuccessDataResult<Candidate>("Kayıt işlemi gerçekleşti");
         }
         return new ErrorDataResult<Candidate>("Kayıt işlemi başarısız");

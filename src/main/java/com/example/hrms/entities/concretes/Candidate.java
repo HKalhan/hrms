@@ -1,5 +1,6 @@
 package com.example.hrms.entities.concretes;
 
+import com.example.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @Entity
@@ -19,7 +19,7 @@ import java.util.Date;
 @PrimaryKeyJoinColumn(name = "id")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Candidate extends User{
+public class Candidate extends User {
     @Column(name = "first_name")
     private String firstName;
 

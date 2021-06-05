@@ -1,5 +1,6 @@
 package com.example.hrms.entities.concretes;
 
+import com.example.hrms.core.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
-public class Employer extends  User{
+public class Employer extends User {
     @Column(name = "company_name")
     private String companyName;
 

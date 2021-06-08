@@ -33,7 +33,6 @@ public class ForeignLanguage {
     private int level;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 }

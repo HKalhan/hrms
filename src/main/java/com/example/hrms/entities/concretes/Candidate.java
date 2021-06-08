@@ -41,32 +41,35 @@ public class Candidate extends User {
     @Column(name = "birth_date", columnDefinition = "Date default CURRENT_DATE")
     private LocalDate birthDate;
 
-    @JsonIgnore   //JSON verisinde gözükmesi istenmeyen anahtarlar özel olarak belirtmek istenirse kullanılır.
     @OneToMany(mappedBy = "candidate")
+    @JsonIgnore   //JSON verisinde gözükmesi istenmeyen anahtarlar özel olarak belirtmek istenirse kullanılır.
     private List<CoverLetter> coverLetters;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
     private List<Experience> experiences;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
     private List<ForeignLanguage> foreignLanguages;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
     private List<Link> links;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
     private List<ProgrammingAbility> programmingAbilities;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
     private List<School> schools;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "candidate" ,optional = false,fetch = FetchType.LAZY)
+    @JsonIgnore
     private Image images;
 }
 

@@ -40,6 +40,6 @@ public class CandidateManager implements CandidateService {
 
 
     private DataResult<Candidate> checkIdIsExist (String identificationNumber ){
-        return new SuccessDataResult<Candidate>(this.candidateDao.findByIdentificationNumber(identificationNumber));
+        return new SuccessDataResult<Candidate>(this.candidateDao.getByIdentificationNumber(identificationNumber));
     }
 }

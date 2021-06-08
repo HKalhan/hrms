@@ -40,7 +40,6 @@ public class School {
     private LocalDate graduationDate;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 }

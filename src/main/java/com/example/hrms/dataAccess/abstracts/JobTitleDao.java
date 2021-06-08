@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface JobTitleDao extends JpaRepository<JobTitle, Integer> {
-    List<JobTitle> findByTitle(String title);
+    List<JobTitle> getByTitle(String title);
 }

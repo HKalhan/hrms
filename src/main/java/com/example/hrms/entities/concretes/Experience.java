@@ -40,7 +40,6 @@ public class Experience {
     private LocalDate leaveDate;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 }

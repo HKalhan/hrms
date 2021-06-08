@@ -1,8 +1,8 @@
 package com.example.hrms.business.concretes;
 
 import com.example.hrms.business.abstracts.*;
-import com.example.hrms.core.verifications.VerificationService;
-import com.example.hrms.core.adapters.MernisService;
+import com.example.hrms.core.utilities.verifications.VerificationService;
+import com.example.hrms.core.utilities.adapters.MernisService;
 import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.entities.concretes.Candidate;
 import com.example.hrms.entities.concretes.Employer;

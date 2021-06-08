@@ -1,8 +1,4 @@
-package com.example.hrms.core.adapters;
-
-import com.example.hrms.entities.concretes.Candidate;
-
-import java.util.Date;
+package com.example.hrms.core.utilities.adapters;
 
 
 public interface MernisService {

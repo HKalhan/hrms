@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "images")
+@Table(name = "cv_images")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Image {
@@ -31,7 +31,6 @@ public class Image {
     private LocalDate updateDate;
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")
     private Candidate candidate;
 

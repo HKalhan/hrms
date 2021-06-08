@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CandidateDao extends JpaRepository<Candidate, Integer>{
-    Candidate findByIdentificationNumber(String identificationNumber);
+    Candidate getByIdentificationNumber(String identificationNumber);
 }

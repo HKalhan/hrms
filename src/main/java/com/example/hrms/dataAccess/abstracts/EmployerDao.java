@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EmployerDao extends JpaRepository<Employer, Integer> {
-    List<Employer> findByCompanyName(String companyName);
-    List<Employer> findByWebAddress(String webAddress);
+    List<Employer> getByCompanyName(String companyName);
+    List<Employer> getByWebAddress(String webAddress);
 
 }

@@ -27,7 +27,6 @@ public class CoverLetter {
     private String contentPost;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 }

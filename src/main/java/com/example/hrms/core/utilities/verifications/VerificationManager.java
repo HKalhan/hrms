@@ -1,11 +1,6 @@
-package com.example.hrms.core.verifications;
+package com.example.hrms.core.utilities.verifications;
 
-import com.example.hrms.core.verifications.VerificationService;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class VerificationManager implements VerificationService {

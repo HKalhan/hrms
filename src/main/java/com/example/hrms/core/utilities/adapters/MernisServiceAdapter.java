@@ -1,10 +1,6 @@
-package com.example.hrms.core.adapters;
+package com.example.hrms.core.utilities.adapters;
 
-import com.example.hrms.entities.concretes.Candidate;
 import org.springframework.stereotype.Service;
-
-import java.rmi.RemoteException;
-import java.util.Date;
 
 @Service
 public class MernisServiceAdapter implements MernisService {

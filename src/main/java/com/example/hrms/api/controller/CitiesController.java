@@ -4,13 +4,10 @@ import com.example.hrms.business.abstracts.CityService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.entities.concretes.City;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/cities")
 public class CitiesController {

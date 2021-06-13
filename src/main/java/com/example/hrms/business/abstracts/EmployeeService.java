@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface EmployeeService {
     DataResult<List<Employee>> getAll();
+
 }

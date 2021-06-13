@@ -25,4 +25,6 @@ public class EmployeeManager implements EmployeeService {
     public DataResult<List<Employee>> getAll() {
         return new SuccessDataResult<List<Employee>>(this.employeeDao.findAll());
     }
+
+
 }

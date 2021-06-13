@@ -5,7 +5,7 @@ import com.example.hrms.entities.concretes.ProgrammingAbility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/programmingabilities")
 public class ProgrammingAbilitiesController {

@@ -11,19 +11,16 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VerificationByEmployee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+@PrimaryKeyJoinColumn(name = "id")
+public class VerificationByEmployee extends Verification{
 
-    @Column(name="employee_id")
-    private int employeeId;
-
-    @Column(name="employer_id")
+    @Column(name="employer_id") //böyle bi hata yaptığıma inanamıyorum şuan :D
     private  int employerId;
 
-    @Column(name="is_confirmed")
-    private boolean isConfirmed;
+
+    @Column(name="employee_id")
+    private Integer employeeId;
+
+
 }
 

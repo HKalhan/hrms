@@ -8,7 +8,7 @@ import lombok.Data;
 
 public interface AuthService {
 
-    DataResult<Candidate> registerCandidate(Candidate candidate,String confirmPassword);
-    DataResult<Employer> registerEmployer(Employer employer, String confirmPassword);
+    Result registerCandidate(Candidate candidate,String confirmPassword);
+    Result registerEmployer(Employer employer, String confirmPassword);
 
 }

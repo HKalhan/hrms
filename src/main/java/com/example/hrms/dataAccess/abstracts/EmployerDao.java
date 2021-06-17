@@ -8,5 +8,6 @@ import java.util.List;
 public interface EmployerDao extends JpaRepository<Employer, Integer> {
     List<Employer> getByCompanyName(String companyName);
     List<Employer> getByWebAddress(String webAddress);
+    Employer getByEmail(String email);
 
 }

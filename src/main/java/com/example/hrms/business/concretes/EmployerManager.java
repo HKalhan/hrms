@@ -25,15 +25,17 @@ public class EmployerManager implements EmployerService {
     }
     @Override
     public Result add(Employer employer) {
-       if (this.userService.checkEmail(employer.getEmail()).getData()!=null){
-           return new ErrorResult("Email adresi daha önce alınmış.");
-       }
         this.employerDao.save(employer);
-        return new SuccessResult("işveren eklendi");
+        return new SuccessResult("Employer added");
     }
 
     @Override
     public DataResult<List<Employer>> getAll() {
-        return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(), "iş vererler listelendi");
+        return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(), "Employer listed");
+    }
+
+    @Override
+    public DataResult<Employer> getByEmail(String email) {
+        return new SuccessDataResult<Employer>(this.employerDao.getByEmail(email));
     }
 }

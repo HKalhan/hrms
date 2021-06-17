@@ -1,90 +1,117 @@
 package com.example.hrms.business.concretes;
 
 import com.example.hrms.business.abstracts.*;
-import com.example.hrms.core.utilities.verifications.VerificationService;
+import com.example.hrms.core.business.BusinessRules;
+import com.example.hrms.core.utilities.verifications.CodeGenerator;
+import com.example.hrms.core.utilities.verifications.ValidationManager;
+import com.example.hrms.core.utilities.verifications.ValidationService;
 import com.example.hrms.core.utilities.adapters.MernisService;
 import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.entities.concretes.Candidate;
 import com.example.hrms.entities.concretes.Employer;
+import com.example.hrms.entities.concretes.VerificationByCode;
+import com.example.hrms.entities.concretes.VerificationByEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.regex.Pattern;
 @Service
 public class AuthManager implements AuthService {
     private MernisService mernisService;
     private CandidateService candidateService;
     private EmployerService employerService;
-    private VerificationService verificationService;
-    private VerificationCodeService verificationCodeService;
+    private ValidationService validationService;
+    private VerificationByCodeService verificationByCodeService;
+    private VerificationByEmployeeService verificationByEmployeeService;
+    private UserService userService;
 
     @Autowired
     public AuthManager(MernisService mernisService, CandidateService candidateService, EmployerService employerService,
-                       VerificationService verificationService, VerificationCodeService verificationCodeService) {
+                       ValidationService validationService, VerificationByCodeService verificationByCodeService,
+                       VerificationByEmployeeService verificationByEmployeeService, UserService userService) {
         super();
         this.mernisService = mernisService;
         this.candidateService = candidateService;
         this.employerService = employerService;
-        this.verificationService = verificationService;
-       this.verificationCodeService=verificationCodeService;
+        this.validationService = validationService;
+       this.verificationByCodeService=verificationByCodeService;
+       this.verificationByEmployeeService=verificationByEmployeeService;
+       this.userService=userService;
     }
 
     @Override
-    public DataResult<Candidate> registerCandidate(Candidate candidate , String confirmPassword) {
-      if (this.checkMernisVerification(candidate.getIdentificationNumber(),candidate.getFirstName()
-        ,candidate.getLastName(),candidate.getBirthDate().getYear())==false)
-       {
-            return new ErrorDataResult<Candidate>("Kimlik doğrulaması hatalı");
-       }
+    public Result registerCandidate(Candidate candidate , String confirmPassword) {
 
-      if (!isEmailValidation(candidate.getEmail())){
-            return new ErrorDataResult<Candidate>("lütfen doğru email adresi ile giriş yapın");
-      }
-        if (this.checkEqualpassword(candidate.getPassword(), confirmPassword).isSuccess()) {
-            this.candidateService.add(candidate);
-            this.verificationCodeService.add(candidate.getId());
-            this.verificationService.verifyByCode(candidate.getEmail(), this.verificationCodeService.createCode());
+        var result =BusinessRules.run(this.checkEqualpassword(candidate.getEmail(), confirmPassword),
+                this.userEmailExist(candidate.getEmail()));
+        if (result != null) {
+            return result;
+        }
 
-            return new SuccessDataResult<Candidate>("Kayıt işlemi gerçekleşti");
+        var addCandidate = this.candidateService.add(candidate);
+
+        if(!addCandidate.isSuccess()) {
+
+            return new ErrorResult("Candidate not registered.");
         }
-        return new ErrorDataResult<Candidate>("Kayıt işlemi başarısız");
-        }
+
+       var code= CodeGenerator.sendVerificationCode();
+        VerificationByCode verifyCodeEntity = new VerificationByCode(candidate.getId(), code);
+        this.verificationByCodeService.add(verifyCodeEntity);
+        this.validationService.verifyByCode(candidate.getEmail(), code);
+       return new SuccessResult();
+
+    }
 
     @Override
-    public DataResult<Employer> registerEmployer(Employer employer, String confirmPassword) {
-        if(!isEmailValidation(employer.getEmail()))
-        {
-            return new ErrorDataResult<Employer>("lütfen doğru email adresi ile giriş yapın");
+    public Result registerEmployer(Employer employer, String confirmPassword) {
+        var result= BusinessRules.run(this.checkEmailMatch(employer),this.checkEqualpassword(confirmPassword,
+                employer.getPassword()), this.userEmailExist(employer.getEmail()));
+        if (result!=null){
+            return result;
         }
 
+        var add= this.employerService.add(employer);
 
-        if (this.checkEqualpassword(employer.getPassword(), confirmPassword).isSuccess()) {
-            this.employerService.add(employer);
-            this.verificationService.verifyByEmployee(employer.getId());
-            return new SuccessDataResult<Employer>("Kayıt işlemi gerçekleşti");
+        if (!add.isSuccess()) {
+            return new ErrorResult("Employer information is incorrect.");
         }
-        return new ErrorDataResult<Employer>("Kayıt işlemi başarısız");
+
+        var code= CodeGenerator.sendVerificationCode();
+        VerificationByCode verificationByCode=new VerificationByCode(employer.getId(), code);
+        VerificationByEmployee verificationByEmployee=new VerificationByEmployee(employer.getId(), null);
+        this.verificationByCodeService.add(verificationByCode);
+        this.verificationByEmployeeService.add(verificationByEmployee);
+        this.validationService.verifyByCode(employer.getEmail(), code);
+
+        return new SuccessResult();
     }
+
 
 
 
     private Result checkEqualpassword(String password, String confirmPassword) {
         if (password.equals(confirmPassword)) {
-            return new SuccessResult("Şifre eşleşti");
+            return new SuccessResult();
         }
-        return new ErrorResult("Şifre eşleşmiyor");
+        return new ErrorResult("Password does not match. Please re-enter your password.");
     }
 
 
-    private boolean checkMernisVerification(String identificationNumber, String firstName, String lastName, int birthDate) {
-        if (mernisService.checkIfRealPerson(identificationNumber,firstName,lastName,birthDate)){
-            return true; }
-        return false;
+    private Result userEmailExist(String email) {
+        if (this.userService.checkEmail(email).getData() == null)
+        {
+            return new SuccessResult();
         }
+        return new ErrorResult();
+    }
 
-    public static boolean isEmailValidation(String email) {
-        final Pattern EMAIL_REGEX = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
-        return EMAIL_REGEX.matcher(email).matches();
+
+
+
+    public Result checkEmailMatch(Employer employer) {
+        var mailDomain = employer.getEmail().split("@")[1];
+        return mailDomain.equals(employer.getWebAddress()) ? new SuccessResult() :
+                new ErrorResult("E-mail domain and web address does not match.");
     }
 
 

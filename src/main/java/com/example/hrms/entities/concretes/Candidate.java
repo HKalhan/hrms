@@ -2,8 +2,10 @@ package com.example.hrms.entities.concretes;
 
 import com.example.hrms.core.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Candidate extends User {
     @NotNull
     @NotBlank
@@ -37,12 +40,11 @@ public class Candidate extends User {
     private String identificationNumber;
 
     @NotNull
-    @NotBlank
     @Column(name = "birth_date", columnDefinition = "Date default CURRENT_DATE")
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "candidate")
-    @JsonIgnore   //JSON verisinde gözükmesi istenmeyen anahtarlar özel olarak belirtmek istenirse kullanılır.
+    @JsonIgnore //JSON verisinde gözükmesi istenmeyen anahtarlar özel olarak belirtmek istenirse kullanılır.
     private List<CoverLetter> coverLetters;
 
 
@@ -50,9 +52,11 @@ public class Candidate extends User {
     @JsonIgnore
     private List<Experience> experiences;
 
+
     @OneToMany(mappedBy = "candidate")
     @JsonIgnore
     private List<ForeignLanguage> foreignLanguages;
+
 
     @OneToMany(mappedBy = "candidate")
     @JsonIgnore
@@ -68,7 +72,8 @@ public class Candidate extends User {
     @JsonIgnore
     private List<School> schools;
 
-    @OneToOne(mappedBy = "candidate" ,optional = false,fetch = FetchType.LAZY)
+
+    @OneToOne(mappedBy = "candidate" )
     @JsonIgnore
     private Image images;
 }

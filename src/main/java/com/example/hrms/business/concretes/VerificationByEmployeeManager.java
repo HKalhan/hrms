@@ -10,6 +10,7 @@ import com.example.hrms.entities.concretes.VerificationByEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,7 +34,11 @@ public class VerificationByEmployeeManager implements VerificationByEmployeeServ
 
     @Override
     public Result update(VerificationByEmployee verificationByEmployee, int employeeId) {
-        this.verificationByEmployeeDao.save(verificationByEmployee);
+        var vEmployeeEntity = this.getByEmployerId(verificationByEmployee.getEmployerId()).getData();
+        vEmployeeEntity.setStatus(true);
+        vEmployeeEntity.setVerifiedDate(LocalDateTime.now());
+        vEmployeeEntity.setEmployeeId(employeeId);
+        this.verificationByEmployeeDao.saveAndFlush(vEmployeeEntity);
         return new SuccessResult();
     }
 

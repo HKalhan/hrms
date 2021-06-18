@@ -3,6 +3,7 @@ package com.example.hrms.business.abstracts;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.Candidate;
+import com.example.hrms.entities.dto.CVDto;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public interface CandidateService {
     DataResult<Candidate > getByEmail(String email);
     DataResult<Candidate > getByIdentificationNumber(String identificationNumber);
     DataResult<Candidate> getById(int id);
+    DataResult<CVDto> getCv(int candidateId);
 
 
 }

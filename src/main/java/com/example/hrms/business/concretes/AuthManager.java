@@ -41,7 +41,7 @@ public class AuthManager implements AuthService {
     @Override
     public Result registerCandidate(Candidate candidate , String confirmPassword) {
 
-        var result =BusinessRules.run(this.checkEqualpassword(candidate.getEmail(), confirmPassword),
+        var result =BusinessRules.run(this.checkEqualpassword(candidate.getPassword(), confirmPassword),
                 this.userEmailExist(candidate.getEmail()));
         if (result != null) {
             return result;

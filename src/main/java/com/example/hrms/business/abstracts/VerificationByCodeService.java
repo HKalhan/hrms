@@ -12,4 +12,5 @@ public interface VerificationByCodeService {
     Result delete(int id);
     DataResult<List<VerificationByCode>> getAll();
     DataResult<VerificationByCode> getById(int id);
+    DataResult<VerificationByCode> getByUserId(int userId);
 }

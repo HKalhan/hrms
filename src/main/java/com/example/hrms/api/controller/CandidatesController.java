@@ -34,4 +34,9 @@ public class CandidatesController {
         return ResponseEntity.ok(this.candidateService.add(candidate));
     }
 
+    @GetMapping("/cv")
+    public ResponseEntity<?> getCv(@RequestParam int candidateId){
+        return ResponseEntity.ok(this.candidateService.getCv(candidateId));
+    }
+
 }

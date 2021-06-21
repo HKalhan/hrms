@@ -30,6 +30,10 @@ public class JobAdvert {
     @JoinColumn(name = "city_id")
     private City city;
 
+    @ManyToOne
+    @JoinColumn(name = "work_time_id")
+    private WorkTime workTime;
+
     @Column(name = "job_description")
     private String jobDescription;
 

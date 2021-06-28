@@ -4,6 +4,7 @@ import com.example.hrms.business.abstracts.JobAdvertService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobAdvert;
+import com.example.hrms.entities.dto.JobAdvertDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/getById")
-    public DataResult<JobAdvert> getById(@RequestParam int id){
+    public DataResult<JobAdvert> getById(@RequestParam ("id" ) int id){
         return this.jobAdvertService.getById(id);
     }
 
@@ -61,6 +62,14 @@ public class JobAdvertsController {
     public Result changeOpenToClose(@RequestParam int id){
         return this.jobAdvertService.changeOpenToClose(id);
     }
+
+    @PostMapping("/addDto")
+    public Result add(@RequestBody JobAdvertDto jobAdvertDto) {
+        System.out.println("INFO" +jobAdvertDto.toString());
+        return this.jobAdvertService.create(jobAdvertDto);
+    }
+
+
 }
 
 

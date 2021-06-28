@@ -88,7 +88,7 @@ public class CandidateManager implements CandidateService {
         cv.setCoverLetters(this.coverLetterService.getByCandidate_id(candidateId).getData());
         cv.setExperiences(this.experienceService.getAllByCandidate_idOrderByLeaveDateDesc(candidateId).getData());
         cv.setForeignLanguages(this.foreignLanguageService.getAllByCandidateId(candidateId).getData());
-        cv.setImage(this.imageService.getByCandidate(candidateId).getData());
+        cv.setImage(this.imageService.getByUser(candidateId).getData());
         cv.setLinks(this.linkService.getAllByCandidateId(candidateId).getData());
         cv.setProgrammingAbilities(this.programmingAbilityService.getAllByCandidateId(candidateId).getData());
         cv.setSchools(this.schoolService.getByCandidateOrderByGraduationDateDesc(candidateId).getData());

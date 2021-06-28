@@ -6,6 +6,7 @@ import com.example.hrms.business.abstracts.UserService;
 import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.dataAccess.abstracts.EmployerDao;
 import com.example.hrms.entities.concretes.Employer;
+import com.example.hrms.entities.dto.EmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +39,11 @@ public class EmployerManager implements EmployerService {
     public DataResult<Employer> getByEmail(String email) {
         return new SuccessDataResult<Employer>(this.employerDao.getByEmail(email));
     }
+
+    @Override
+    public DataResult<Employer> getById(int id) {
+        return new SuccessDataResult<Employer>(this.employerDao.getById(id));
+    }
+
+
 }

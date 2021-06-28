@@ -1,5 +1,6 @@
 package com.example.hrms.entities.concretes;
 
+import com.example.hrms.core.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "cv_images")
+@Table(name = "images")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Image {
@@ -31,8 +32,8 @@ public class Image {
     private LocalDate updateDate;
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "candidate_id", referencedColumnName = "id")
-    private Candidate candidate;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     /* FetchType, aralarında ilişki bulunan entitylerden bir tarafı(candidate) yüklerken diğer tarafın(image)
      yüklenme  stratejisini belirlememize olanak sağlar.

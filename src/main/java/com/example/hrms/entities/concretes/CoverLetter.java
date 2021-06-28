@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-@Table(name = "cv_cover_letters")
+@Table(name = "cover_letters")
 @AllArgsConstructor
 @NoArgsConstructor
 public class CoverLetter {
@@ -29,4 +29,8 @@ public class CoverLetter {
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
+
+    @ManyToOne
+    @JoinColumn(name = "employer_id")
+    private Employer employer;
 }

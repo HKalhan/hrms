@@ -43,6 +43,14 @@ public class Candidate extends User {
     @Column(name = "birth_date", columnDefinition = "Date default CURRENT_DATE")
     private LocalDate birthDate;
 
+
+    @Column(name = "github_address", columnDefinition = "TEXT")
+    String githubAddress;
+
+    @Column(name = "linkedin_address", columnDefinition = "TEXT")
+    String linkedinAddress;
+
+
     @OneToMany(mappedBy = "candidate")
     @JsonIgnore //JSON verisinde gözükmesi istenmeyen anahtarlar özel olarak belirtmek istenirse kullanılır.
     private List<CoverLetter> coverLetters;
@@ -73,8 +81,8 @@ public class Candidate extends User {
     private List<School> schools;
 
 
-    @OneToOne(mappedBy = "candidate" )
+    /*@OneToOne(mappedBy = "candidate" )
     @JsonIgnore
-    private Image images;
+    private Image images;*/
 }
 

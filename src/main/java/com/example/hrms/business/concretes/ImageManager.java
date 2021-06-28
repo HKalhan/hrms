@@ -1,6 +1,7 @@
 package com.example.hrms.business.concretes;
 
 import com.example.hrms.business.abstracts.ImageService;
+import com.example.hrms.core.entities.User;
 import com.example.hrms.core.utilities.imageUpload.ImageHelper;
 import com.example.hrms.core.utilities.imageUpload.ImageUploadService;
 import com.example.hrms.core.utilities.results.DataResult;
@@ -36,10 +37,10 @@ public class ImageManager implements ImageService {
         @SuppressWarnings("unchecked")
         Map<String,String> sample=(Map<String, String>) this.helper.uploadImageFile(imageFile).getData();
 
-        Candidate candidate=new Candidate();
+        User user=new User();
         Image image=new Image();
-        candidate.setId(id);
-        image.setCandidate(candidate);
+        user.setId(id);
+        image.setUser(user);
 
         image.setUrl(sample.get("url"));
         image.setUpdateDate(LocalDate.now());
@@ -55,8 +56,8 @@ public class ImageManager implements ImageService {
     }
 
     @Override
-    public DataResult<Image> getByCandidate(int id) {
-        return new SuccessDataResult<Image>(this.imageDao.getByCandidate_id(id));
+    public DataResult<Image> getByUser(int id) {
+        return new SuccessDataResult<Image>(this.imageDao.getByUser_id(id));
     }
 
     @Override

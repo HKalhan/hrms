@@ -19,7 +19,10 @@ public class JobAdvertDto {
     private int salaryMax;
     private String jobDescription;
     private int openPositionCount;
+    private LocalDate applicationDate;
     private LocalDate applicationDeadline;
     private boolean isActive;
+    private int workPlaceId;
+    private int workTimeId;
 
 }

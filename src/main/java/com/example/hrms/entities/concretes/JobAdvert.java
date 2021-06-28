@@ -1,5 +1,6 @@
 package com.example.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "job_adverts")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class JobAdvert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -35,4 +35,13 @@ public class User {
     @NotBlank
     private String password;
 
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+
+    @OneToOne(mappedBy = "user" )
+    @JsonIgnore
+    private Image images;
+
 }

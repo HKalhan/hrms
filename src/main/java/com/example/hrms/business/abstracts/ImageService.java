@@ -10,7 +10,7 @@ import java.util.List;
 public interface ImageService {
     Result upload (int id, MultipartFile imageFile);
     Result delete(int id);
-    DataResult<Image>getByCandidate(int id);
+    DataResult<Image>getByUser(int id);
     DataResult<List<Image>> getAll();
     DataResult<Image> getById(int id);
 }

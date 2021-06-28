@@ -2,22 +2,35 @@ package com.example.hrms.business.concretes;
 
 import com.example.hrms.business.abstracts.JobAdvertService;
 import com.example.hrms.core.utilities.results.*;
-import com.example.hrms.dataAccess.abstracts.JobAdvertDao;
+import com.example.hrms.dataAccess.abstracts.*;
 import com.example.hrms.entities.concretes.JobAdvert;
+import com.example.hrms.entities.dto.JobAdvertDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class JobAdvertManager implements JobAdvertService {
 
     private JobAdvertDao jobAdvertDao;
+    private CityDao cityDao;
+    private EmployerDao employerDao;
+    private JobTitleDao jobTitleDao;
+    private WorkPlaceDao workPlaceDao;
+    private WorkTimeDao workTimeDao;
 
     @Autowired
-    public JobAdvertManager(JobAdvertDao jobAdvertDao) {
+    public JobAdvertManager(JobAdvertDao jobAdvertDao , CityDao cityDao, EmployerDao employerDao,
+                            JobTitleDao jobTitleDao, WorkTimeDao workTimeDao, WorkPlaceDao workPlaceDao) {
         super();
         this.jobAdvertDao = jobAdvertDao;
+        this.cityDao=cityDao;
+        this.employerDao=employerDao;
+        this.jobTitleDao=jobTitleDao;
+        this.workPlaceDao=workPlaceDao;
+        this.workTimeDao=workTimeDao;
     }
 
     @Override
@@ -77,5 +90,28 @@ public class JobAdvertManager implements JobAdvertService {
         return new SuccessResult("iş ilanı başarıyla kaldırıldı");
 
 
+    }
+
+    @Override
+    public Result create(JobAdvertDto jobAdvertDto) {
+        JobAdvert jobAdvert=new JobAdvert();
+
+        jobAdvert.setId(jobAdvertDto.getId());
+        jobAdvert.setActive(true);
+        jobAdvert.setApplicationDate(jobAdvertDto.getApplicationDeadline());
+        jobAdvert.setApplicationDeadline(jobAdvertDto.getApplicationDeadline());
+        jobAdvert.setCity(this.cityDao.getById(jobAdvertDto.getCityId()));
+        jobAdvert.setEmployer(this.employerDao.getById(jobAdvertDto.getEmployerId()));
+        jobAdvert.setJobDescription(jobAdvertDto.getJobDescription());
+        jobAdvert.setJobTitle(this.jobTitleDao.getById(jobAdvertDto.getJobTitleId()));
+        jobAdvert.setOpenPositionCount(jobAdvertDto.getOpenPositionCount());
+        jobAdvert.setPublishedAt(LocalDate.now());
+        jobAdvert.setSalaryMax(jobAdvertDto.getSalaryMax());
+        jobAdvert.setSalaryMin(jobAdvertDto.getSalaryMin());
+        jobAdvert.setWorkPlace(this.workPlaceDao.getById(jobAdvertDto.getWorkPlaceId()));
+        jobAdvert.setWorkTime(this.workTimeDao.getById(jobAdvertDto.getWorkTimeId()));
+        this.jobAdvertDao.save(jobAdvert);
+
+        return new SuccessResult("Job Advert Added!");
     }
 }

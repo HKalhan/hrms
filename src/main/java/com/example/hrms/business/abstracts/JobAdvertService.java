@@ -3,6 +3,7 @@ package com.example.hrms.business.abstracts;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobAdvert;
+import com.example.hrms.entities.dto.JobAdvertDto;
 
 import java.util.List;
 
@@ -17,5 +18,6 @@ public interface JobAdvertService {
     DataResult<List<JobAdvert>>  findAllByOrderByPublishedAtDesc();
     DataResult<List<JobAdvert>> getAllActiveJobAdvertByEmployer(int id);
     Result changeOpenToClose(int id);
+    Result create(JobAdvertDto jobAdvertDto);
 
 }

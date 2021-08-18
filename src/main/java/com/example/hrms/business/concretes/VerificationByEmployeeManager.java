@@ -6,7 +6,7 @@ import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
 import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.VerificationByEmployeeDao;
-import com.example.hrms.entities.concretes.VerificationByEmployee;
+import com.example.hrms.entities.concretes.verifications.VerificationByEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,20 +33,21 @@ public class VerificationByEmployeeManager implements VerificationByEmployeeServ
     }
 
     @Override
-    public Result update(VerificationByEmployee verificationByEmployee, int employeeId) {
-        var vEmployeeEntity = this.getByEmployerId(verificationByEmployee.getEmployerId()).getData();
+    public Result approve2(VerificationByEmployee verificationByEmployee) {
+        var vEmployeeEntity = this.getByEntityId(verificationByEmployee.getEntityId()).getData();
         vEmployeeEntity.setStatus(true);
         vEmployeeEntity.setVerifiedDate(LocalDateTime.now());
-        vEmployeeEntity.setEmployeeId(employeeId);
+        vEmployeeEntity.setEmployeeId(verificationByEmployee.getEmployeeId());
         this.verificationByEmployeeDao.saveAndFlush(vEmployeeEntity);
-        return new SuccessResult();
+        return new SuccessResult("Approved!");
     }
 
     @Override
-    public Result delete(int id) {
-        this.verificationByEmployeeDao.deleteById(id);
-        return new SuccessResult();
+    public Result delete(VerificationByEmployee verificationByEmployee) {
+       this.verificationByEmployeeDao.delete(verificationByEmployee);
+       return new SuccessResult();
     }
+
 
     @Override
     public DataResult<List<VerificationByEmployee>> getAll() {
@@ -58,8 +59,15 @@ public class VerificationByEmployeeManager implements VerificationByEmployeeServ
         return new SuccessDataResult<VerificationByEmployee>(this.verificationByEmployeeDao.getById(id));
     }
 
-    @Override
+   /* @Override
     public DataResult<VerificationByEmployee> getByEmployerId(int employerId) {
         return new  SuccessDataResult<VerificationByEmployee>(this.verificationByEmployeeDao.getByEmployerId(employerId));
+    }*/
+
+    @Override
+    public DataResult<VerificationByEmployee> getByEntityId(int entityId) {
+        return new SuccessDataResult<VerificationByEmployee>(this.verificationByEmployeeDao.getByEntityId(entityId)) ;
     }
+
+
 }

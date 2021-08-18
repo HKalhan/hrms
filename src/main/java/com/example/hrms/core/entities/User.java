@@ -21,8 +21,8 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    @Column(name = "user_id")
+    private int userId;
 
     @Column(name = "email_address")
     @Email
@@ -39,9 +39,10 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-
-    @OneToOne(mappedBy = "user" )
     @JsonIgnore
-    private Image images;
+    @OneToMany(mappedBy = "user")
+    private List<Image> images;
+
+
 
 }

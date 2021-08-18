@@ -53,6 +53,6 @@ public class LinkManager implements LinkService {
 
     @Override
     public DataResult<List<Link>> getAllByCandidateId(int id) {
-        return new SuccessDataResult<List<Link>>(this.linkDao.getAllByCandidate_id(id));
+        return new SuccessDataResult<List<Link>>(this.linkDao.getAllByCandidate_userId(id));
     }
 }

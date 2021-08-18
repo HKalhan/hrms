@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface WorkPlaceService {
     DataResult<List<WorkPlace>> getAll();
+    DataResult<WorkPlace> getById(int id);
 }

@@ -2,6 +2,7 @@ package com.example.hrms.business.concretes;
 
 
 import com.example.hrms.business.abstracts.EmployerService;
+import com.example.hrms.business.abstracts.ImageService;
 import com.example.hrms.business.abstracts.UserService;
 import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.dataAccess.abstracts.EmployerDao;
@@ -16,6 +17,7 @@ public class EmployerManager implements EmployerService {
 
     private EmployerDao employerDao;
     private UserService userService;
+    private ImageService imageService;
 
     @Autowired
     public EmployerManager(EmployerDao employerDao, UserService userService) {
@@ -43,6 +45,11 @@ public class EmployerManager implements EmployerService {
     @Override
     public DataResult<Employer> getById(int id) {
         return new SuccessDataResult<Employer>(this.employerDao.getById(id));
+    }
+
+    @Override
+    public DataResult<List<EmployerDto>> getEmployerDto() {
+        return new SuccessDataResult<List<EmployerDto>>(this.employerDao.getEmployerDto());
     }
 
 

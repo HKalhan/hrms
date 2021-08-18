@@ -1,6 +1,6 @@
 package com.example.hrms.dataAccess.abstracts;
 
-import com.example.hrms.entities.concretes.VerificationByCode;
+import com.example.hrms.entities.concretes.verifications.VerificationByCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VerificationByCodeDao extends JpaRepository<VerificationByCode, Integer> {

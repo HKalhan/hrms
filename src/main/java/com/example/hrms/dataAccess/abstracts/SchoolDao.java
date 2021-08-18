@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SchoolDao extends JpaRepository<School, Integer> {
     School getById(int id);
-    List<School> getAllByCandidate_id(int id);
-    List<School> getAllByCandidate_idOrderByGraduationDateDesc(int id);
+    List<School> getAllByCandidate_userId(int userId);
+    List<School> getAllByCandidate_userIdOrderByGraduationDateDesc(int userId);
 }

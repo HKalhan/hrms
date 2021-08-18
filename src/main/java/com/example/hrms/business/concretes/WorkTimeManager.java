@@ -26,4 +26,9 @@ public class WorkTimeManager implements WorkTimeService {
     public DataResult<List<WorkTime>> getAll() {
         return new SuccessDataResult<List<WorkTime>>(this.workTimeDao.findAll());
     }
+
+    @Override
+    public DataResult<WorkTime> getById(int id) {
+        return new SuccessDataResult<WorkTime>(this.workTimeDao.getById(id));
+    }
 }

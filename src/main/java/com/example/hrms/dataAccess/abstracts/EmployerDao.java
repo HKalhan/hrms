@@ -14,5 +14,9 @@ public interface EmployerDao extends JpaRepository<Employer, Integer> {
     List<Employer> getByWebAddress(String webAddress);
     Employer getByEmail(String email);
 
+    @Query("Select new  com.example.hrms.entities.dto.EmployerDto"
+            + "(e.id, e.companyName,e.email, e.webAddress, e.phoneNumber, e.description, i.url) "
+            + "From Employer e Inner Join e.images i")
+    List<EmployerDto> getEmployerDto();
 
 }

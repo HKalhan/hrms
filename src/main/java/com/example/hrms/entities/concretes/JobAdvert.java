@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "job_adverts")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+
 public class JobAdvert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +38,7 @@ public class JobAdvert {
     private WorkTime workTime;
 
     @ManyToOne
-    @JoinColumn(name = "workplaces_id")
+    @JoinColumn(name = "workplace_id")
     private WorkPlace workPlace;
 
 
@@ -50,19 +51,21 @@ public class JobAdvert {
     @Column(name = "salary_max")
     private int salaryMax;
 
+
     @Column(name = "open_position_count")
     private int openPositionCount;
 
     @Column(name="application_date")
     private LocalDate applicationDate;
 
-    @Column(name="application_deadline")
+   @Column(name="application_deadline")
     private LocalDate applicationDeadline;
-
-    @Column(name = "published_at")
-    private LocalDate publishedAt;
 
     @Column(name= "is_active")
     private boolean isActive;
+
+  //  public static int totalJobAdvertListSize = -1;
+
+
 
 }

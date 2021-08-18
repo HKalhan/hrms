@@ -54,11 +54,11 @@ public class ExperienceManager implements ExperienceService {
 
     @Override
     public DataResult<List<Experience>> getAllByCandidate_idOrderByLeaveDateDesc(int id) {
-        return new SuccessDataResult<List<Experience>>(this.experienceDao.getAllByCandidate_idOrderByLeaveDateDesc(id));
+        return new SuccessDataResult<List<Experience>>(this.experienceDao.getAllByCandidate_userIdOrderByLeaveDateDesc(id));
     }
 
     @Override
     public DataResult<List<Experience>> getAllByCandidate_id(int id) {
-        return new SuccessDataResult<List<Experience>>(this.experienceDao.getAllByCandidate_id(id));
+        return new SuccessDataResult<List<Experience>>(this.experienceDao.getAllByCandidate_userId(id));
     }
 }

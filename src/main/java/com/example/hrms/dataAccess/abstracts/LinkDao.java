@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface LinkDao extends JpaRepository<Link, Integer> {
     Link getById(int id);
-    List<Link> getAllByCandidate_id(int id);
+    List<Link> getAllByCandidate_userId(int userId);
 }

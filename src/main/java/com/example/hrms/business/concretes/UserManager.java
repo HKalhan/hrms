@@ -31,4 +31,9 @@ public class UserManager implements UserService {
         return new SuccessResult("Kullanıcı eklendi");
     }
 
+    @Override
+    public SuccessDataResult<User> getById(int userId) {
+        return new SuccessDataResult<User>(this.userDao.findById(userId).get());
+    }
+
 }

@@ -4,14 +4,12 @@ import com.example.hrms.business.abstracts.VerificationByCodeService;
 import com.example.hrms.core.business.BusinessRules;
 import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.dataAccess.abstracts.VerificationByCodeDao;
-import com.example.hrms.entities.concretes.VerificationByCode;
+import com.example.hrms.entities.concretes.verifications.VerificationByCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 
 @Service
 public class VerificationByCodeManager implements VerificationByCodeService {
@@ -30,7 +28,7 @@ public class VerificationByCodeManager implements VerificationByCodeService {
     }
 
     @Override
-    public Result update(VerificationByCode verificationByCode) {
+    public Result approve(VerificationByCode verificationByCode) {
         var codeForValidate = this.getByUserId(verificationByCode.getUserId()).getData();
 
         var result = BusinessRules.run(

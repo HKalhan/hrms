@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ForeignLanguageDao extends JpaRepository<ForeignLanguage, Integer> {
     ForeignLanguage getById(int id);
-    List<ForeignLanguage> getAllByCandidate_id(int id);
+    List<ForeignLanguage> getAllByCandidate_userId(int userId);
 }

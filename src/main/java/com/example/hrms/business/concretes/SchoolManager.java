@@ -53,11 +53,11 @@ public class SchoolManager implements SchoolService {
 
     @Override
     public DataResult<List<School>> getAllByCandidateId(int id) {
-        return new SuccessDataResult<List<School>>(this.schoolDao.getAllByCandidate_id(id));
+        return new SuccessDataResult<List<School>>(this.schoolDao.getAllByCandidate_userId(id));
     }
 
     @Override
     public DataResult<List<School>> getByCandidateOrderByGraduationDateDesc(int id) {
-        return new SuccessDataResult<List<School>>(this.schoolDao.getAllByCandidate_idOrderByGraduationDateDesc(id));
+        return new SuccessDataResult<List<School>>(this.schoolDao.getAllByCandidate_userIdOrderByGraduationDateDesc(id));
     }
 }

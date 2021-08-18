@@ -7,4 +7,5 @@ import com.example.hrms.core.utilities.results.Result;
 public interface UserService {
     DataResult<User> checkEmail(String email);
     Result add(User user);
+    DataResult<User> getById(int userId);
 }

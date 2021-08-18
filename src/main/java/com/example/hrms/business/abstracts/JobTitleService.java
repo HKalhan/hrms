@@ -8,4 +8,5 @@ import java.util.List;
 public interface JobTitleService {
     DataResult<List<JobTitle>> getAll();
     Result add(JobTitle jobTitle);
+    DataResult<JobTitle> getById(int id);
 }

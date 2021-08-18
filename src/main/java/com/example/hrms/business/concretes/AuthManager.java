@@ -3,14 +3,14 @@ package com.example.hrms.business.concretes;
 import com.example.hrms.business.abstracts.*;
 import com.example.hrms.core.business.BusinessRules;
 import com.example.hrms.core.utilities.verifications.CodeGenerator;
-import com.example.hrms.core.utilities.verifications.ValidationManager;
 import com.example.hrms.core.utilities.verifications.ValidationService;
 import com.example.hrms.core.utilities.adapters.MernisService;
 import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.entities.concretes.Candidate;
 import com.example.hrms.entities.concretes.Employer;
-import com.example.hrms.entities.concretes.VerificationByCode;
-import com.example.hrms.entities.concretes.VerificationByEmployee;
+import com.example.hrms.entities.concretes.verifications.VerificationByCode;
+import com.example.hrms.entities.concretes.verifications.VerificationByEmployee;
+import com.example.hrms.entities.concretes.verifications.VerificationTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +55,7 @@ public class AuthManager implements AuthService {
         }
 
        var code= CodeGenerator.sendVerificationCode();
-        VerificationByCode verifyCodeEntity = new VerificationByCode(candidate.getId(), code);
+        VerificationByCode verifyCodeEntity = new VerificationByCode(candidate.getUserId(), code);
         this.verificationByCodeService.add(verifyCodeEntity);
         this.validationService.verifyByCode(candidate.getEmail(), code);
        return new SuccessResult();
@@ -77,10 +77,10 @@ public class AuthManager implements AuthService {
         }
 
         var code= CodeGenerator.sendVerificationCode();
-        VerificationByCode verificationByCode=new VerificationByCode(employer.getId(), code);
-        VerificationByEmployee verificationByEmployee=new VerificationByEmployee(employer.getId(), null);
+        VerificationByCode verificationByCode=new VerificationByCode(employer.getUserId(), code);
+        var verifyEmployeeEntity = new VerificationByEmployee(employer.getUserId(), VerificationTypeEnum.EmployerRegistration);
         this.verificationByCodeService.add(verificationByCode);
-        this.verificationByEmployeeService.add(verificationByEmployee);
+        this.verificationByEmployeeService.add(verifyEmployeeEntity);
         this.validationService.verifyByCode(employer.getEmail(), code);
 
         return new SuccessResult();

@@ -1,5 +1,4 @@
-package com.example.hrms.entities.concretes;
-
+package com.example.hrms.entities.concretes.verifications;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,12 +15,13 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id")
 @AllArgsConstructor
 @NoArgsConstructor
-public class VerificationByCode  extends Verification{
+public class VerificationByCode  extends Verification {
 
-    @Column(name = "user_id")
+   @Column(name = "user_id")
     private int userId;
 
     @Column(name = "code")
     private String code;
+
 
 }

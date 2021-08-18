@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -24,6 +23,12 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Candidate extends User {
+
+    public Candidate(int user_id) {
+        this.setUserId(user_id);
+    }
+
+
     @NotNull
     @NotBlank
     @Column(name = "first_name")
@@ -79,6 +84,10 @@ public class Candidate extends User {
     @OneToMany(mappedBy = "candidate")
     @JsonIgnore
     private List<School> schools;
+
+
+    @OneToMany(mappedBy = "candidate")
+    private List<FavJobAdvert> favJobAdvert;
 
 
     /*@OneToOne(mappedBy = "candidate" )

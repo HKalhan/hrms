@@ -18,10 +18,10 @@ public class JobTitle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private int jobTitleId;
 
-    @Column(name="title")
-    private  String title;
+    @Column(name="name")
+    private  String name;
 
     @OneToMany(mappedBy = "jobTitle")
     private List<JobAdvert> jobAdverts;

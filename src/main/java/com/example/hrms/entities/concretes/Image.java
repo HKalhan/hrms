@@ -2,6 +2,7 @@ package com.example.hrms.entities.concretes;
 
 import com.example.hrms.core.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ import java.time.LocalDate;
 @Table(name = "images")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +34,12 @@ public class Image {
     @Column(name = "update_date")
     private LocalDate updateDate;
 
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
+   /* @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;*/
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     /* FetchType, aralarında ilişki bulunan entitylerden bir tarafı(candidate) yüklerken diğer tarafın(image)

@@ -5,13 +5,14 @@ import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobAdvert;
 import com.example.hrms.entities.dto.JobAdvertDto;
+import com.example.hrms.entities.dto.JobAdvertFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @CrossOrigin
 @RestController
-@RequestMapping("/api/jobAdvert")
+@RequestMapping("/api/jobAdverts")
 public class JobAdvertsController {
 
     private JobAdvertService jobAdvertService;
@@ -58,9 +59,24 @@ public class JobAdvertsController {
         return this.jobAdvertService.getAllActiveJobAdvertByEmployer(id);
     }
 
-    @PostMapping("/changeOpenToClose")
-    public Result changeOpenToClose(@RequestParam int id){
-        return this.jobAdvertService.changeOpenToClose(id);
+    @GetMapping("/get-approved")
+    public DataResult<List<JobAdvert>> getApprovedJobAdverts() {
+        return this.jobAdvertService.getApprovedJobAdverts();
+    }
+
+    @GetMapping("/get-requests")
+    public DataResult<List<JobAdvert>> getJobAdvertRequests() {
+        return this.jobAdvertService.getJobAdvertRequests();
+    }
+
+    @GetMapping("/approve")
+    public Result approveJobAdvert(int id) {
+        return this.jobAdvertService.approveJobAdvert(id);
+    }
+
+    @GetMapping("/cancel")
+    public Result cancelJobAdvert(int id) {
+        return this.jobAdvertService.cancelJobAdvert(id);
     }
 
     @PostMapping("/addDto")
@@ -68,6 +84,14 @@ public class JobAdvertsController {
         System.out.println("INFO" +jobAdvertDto.toString());
         return this.jobAdvertService.create(jobAdvertDto);
     }
+
+    @PostMapping("/getfilterandpage")
+    public Result getFilterAndPage(@RequestParam int pageNo,@RequestParam int pageSize,@RequestBody JobAdvertFilter jobAdvertFilter) {
+        return this.jobAdvertService.getAllFilterAndPage(pageNo, pageSize, jobAdvertFilter);
+
+    }
+
+
 
 
 }

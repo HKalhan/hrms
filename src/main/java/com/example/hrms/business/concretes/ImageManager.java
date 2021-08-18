@@ -39,7 +39,7 @@ public class ImageManager implements ImageService {
 
         User user=new User();
         Image image=new Image();
-        user.setId(id);
+        user.setUserId(id);
         image.setUser(user);
 
         image.setUrl(sample.get("url"));
@@ -57,7 +57,7 @@ public class ImageManager implements ImageService {
 
     @Override
     public DataResult<Image> getByUser(int id) {
-        return new SuccessDataResult<Image>(this.imageDao.getByUser_id(id));
+        return new SuccessDataResult<Image>(this.imageDao.getByUser_userId(id));
     }
 
     @Override

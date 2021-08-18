@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ExperienceDao extends JpaRepository<Experience, Integer> {
     Experience getById(int id);
-    List<Experience> getAllByCandidate_idOrderByLeaveDateDesc(int id);
-    List<Experience> getAllByCandidate_id(int id);
+    List<Experience> getAllByCandidate_userIdOrderByLeaveDateDesc(int userId);
+    List<Experience> getAllByCandidate_userId(int userId);
 }

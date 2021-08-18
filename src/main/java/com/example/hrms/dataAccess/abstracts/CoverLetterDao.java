@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CoverLetterDao extends JpaRepository<CoverLetter, Integer> {
-    List<CoverLetter> getByCandidate_id(int id);
+    List<CoverLetter> getByCandidate_userId(int userId);
 }

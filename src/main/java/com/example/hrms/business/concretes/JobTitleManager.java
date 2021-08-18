@@ -35,4 +35,9 @@ public class JobTitleManager implements JobTitleService {
         this.jobTitleDao.save(jobTitle);
         return new SuccessResult("İş ünvanı eklendi");
     }
+
+    @Override
+    public DataResult<JobTitle> getById(int id) {
+        return new SuccessDataResult<JobTitle>(this.jobTitleDao.getById(id));
+    }
 }

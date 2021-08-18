@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface WorkTimeService {
     DataResult<List<WorkTime>> getAll();
+    DataResult<WorkTime> getById(int id);
 }

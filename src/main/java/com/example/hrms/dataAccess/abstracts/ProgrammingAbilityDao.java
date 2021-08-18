@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ProgrammingAbilityDao extends JpaRepository<ProgrammingAbility , Integer> {
     ProgrammingAbility getById(int id);
-    List<ProgrammingAbility> getAllByCandidate_id(int id);
+    List<ProgrammingAbility> getAllByCandidate_userId(int userId);
 }

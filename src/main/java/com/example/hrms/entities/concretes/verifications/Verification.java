@@ -1,4 +1,4 @@
-package com.example.hrms.entities.concretes;
+package com.example.hrms.entities.concretes.verifications;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

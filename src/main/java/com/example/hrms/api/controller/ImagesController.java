@@ -44,8 +44,8 @@ public class ImagesController {
     }
 
 
-    @GetMapping("/getByJobseekerId")
-    public DataResult<Image> getByJobseekerId(@RequestParam int id){
+    @GetMapping("/getByCandidateId")
+    public DataResult<Image> getByCandidateId(@RequestParam int id){
         return this.imageService.getByUser(id);
     }
 }

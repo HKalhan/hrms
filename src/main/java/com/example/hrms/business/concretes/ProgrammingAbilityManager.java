@@ -54,6 +54,6 @@ public class ProgrammingAbilityManager implements ProgrammingAbilityService {
 
     @Override
     public DataResult<List<ProgrammingAbility>> getAllByCandidateId(int id) {
-        return new SuccessDataResult<List<ProgrammingAbility>>(this.programmingAbilityDao.getAllByCandidate_id(id));
+        return new SuccessDataResult<List<ProgrammingAbility>>(this.programmingAbilityDao.getAllByCandidate_userId(id));
     }
 }

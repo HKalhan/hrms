@@ -1,6 +1,7 @@
 package com.example.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,16 +16,17 @@ import java.time.LocalDate;
 @Table(name = "cv_experiences")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "working_place")
+    @Column(name = "workplaces")
     @NotNull
     @NotBlank
-    private String working_place;
+    private String workPlace;
 
     @NotNull
     @NotBlank

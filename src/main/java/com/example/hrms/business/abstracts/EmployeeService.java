@@ -10,4 +10,7 @@ public interface EmployeeService {
     DataResult<List<Employee>> getAll();
     Result add(Employee employee);
     DataResult<Employee> getById(int id);
+    Result update(int id,String email,String password,String passwordRepeat,String firstName,String lastName);
+    Result confirmUpdateEmployer(int employerId);
+
 }

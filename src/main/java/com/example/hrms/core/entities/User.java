@@ -43,6 +43,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Image> images;
 
+    @Column(name = "password_repeat")
+    @NotBlank
+    @NotNull
+    private String passwordRepeat;
+
 
 
 }

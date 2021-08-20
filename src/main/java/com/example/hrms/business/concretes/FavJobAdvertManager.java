@@ -37,6 +37,7 @@ public class FavJobAdvertManager implements FavJobAdvertService {
 
     @Override
     public DataResult<FavJobAdvert> getByJobAdvert_Id(int id) {
+
         return new SuccessDataResult<FavJobAdvert>
                 (this.favJobAdvertDao.getByJobAdvert_Id(id), "");
     }

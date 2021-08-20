@@ -64,7 +64,7 @@ public class JobAdvert {
     @Column(name= "is_active")
     private boolean isActive;
 
-  //  public static int totalJobAdvertListSize = -1;
+
 
 
 

@@ -167,48 +167,6 @@ public class JobAdvertManager implements JobAdvertService {
                 this.jobAdvertDao.getByFilter(advertFilter, pageable).getTotalElements()+"");
     }
 
-   /* @Override
-    public DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize, JobAdvertFilterOption filterOption) {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-
-        if (filterOption != null) {
-
-            if (filterOption.getCityId() == null || filterOption.getCityId().size() == 0) {
-                filterOption.setCityId(null);
-            }
-            if (filterOption.getJobTitleId() == null || filterOption.getJobTitleId().size() == 0) {
-                filterOption.setJobTitleId(null);
-            }
-            if (filterOption.getWorkPlaceId() == null || filterOption.getWorkPlaceId().size() == 0) {
-                filterOption.setWorkPlaceId(null);
-            }
-            if (filterOption.getWorkTimeId() == null || filterOption.getWorkTimeId().size() == 0) {
-                filterOption.setWorkTimeId(null);
-            }
-        }
-
-
-        //  System.out.println(this.jobAdvertDao.getFilteringAndPage(filterOption, pageable).getTotalElements());
-
-
-      /*  JobAdvert.totalJobAdvertListSize = (int) this.jobAdvertDao.getFilteringAndPage(filterOption, pageable).getTotalElements();
-        return new SuccessDataResult<List<JobAdvert>>
-         // (JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getContent()),
-           //"Job Advert "+pageNo+". listed.");
-    }
-
-
-        public static List<JobAdvert> NormalList(List<JobAdvert> normalList ){
-            List<JobAdvert> dtoList = new ArrayList<JobAdvert>();
-
-            for(int i = 0; i< normalList.size(); i++) {
-                dtoList.add(NormalList(normalList.get(i)));
-            }
-
-            return dtoList;
-        }
-*/
-
 
 
 

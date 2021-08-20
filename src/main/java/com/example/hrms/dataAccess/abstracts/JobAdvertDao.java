@@ -31,14 +31,6 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert,Integer> {
     public void updateIsActive(@Param(value = "id") int id, @Param(value = "active") boolean isActive);
 
 
-  /*  @Query("Select j from JobAdvert j where ((:#{#filter.cityId}) IS NULL OR j.city.id IN (:#{#filter.cityId}))"
-            + "and ((:#{#filter.jobTitleId}) IS NULL OR j.jobTitle.id IN (:#{#filter.jobTitleId}))"
-            + "and ((:#{#filter.workPlaceId}) IS NULL OR j.workPlace.id IN (:#{#filter.workPlaceId}))"
-            + "and ((:#{#filter.workTimeId}) IS NULL OR j.workTime.id IN (:#{#filter.workTimeId}))"
-            + "and ((:#{#filter.userIdForFavorite}) = 0 OR j.id IN (select fj.jobAdvert.id from FavJobAdvert fj where fj.candidate.userId = (:#{#filter.userIdForFavorite})))"
-            + "and j.isActive = TRUE")
-    public Page<JobAdvert> getFilteringAndPage(@Param("filter") JobAdvertFilterOption filterOption, Pageable pageable);
-*/
 
    @Query("Select j  from JobAdvert j where ((:#{#filter.cityId}) IS NULL OR j.city.id IN (:#{#filter.cityId}))"
             + "and ((:#{#filter.jobTitleId}) IS NULL OR j.jobTitle.jobTitleId IN (:#{#filter.jobTitleId}))"
@@ -46,6 +38,9 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert,Integer> {
             +" and ((:#{#filter.workTimeId}) IS NULL OR j.workTime.id IN (:#{#filter.workTimeId}))"
             + "and j.isActive = true Order By j.applicationDate Desc ")
     public Page<JobAdvert> getByFilter(@Param("filter") JobAdvertFilter jobAdvertFilter, Pageable pageable);
+
+
+
 
 
 

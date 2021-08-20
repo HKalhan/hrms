@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class EmployerManager implements EmployerService {
 
@@ -51,6 +53,16 @@ public class EmployerManager implements EmployerService {
     public DataResult<List<EmployerDto>> getEmployerDto() {
         return new SuccessDataResult<List<EmployerDto>>(this.employerDao.getEmployerDto());
     }
+
+   /* @Override
+    public DataResult<List<Employer>> getByIsAcivatedUpdate() {
+
+    }
+
+    @Override
+    public Map<String, Object> getJson(Employer employer) {
+
+    }*/
 
 
 }

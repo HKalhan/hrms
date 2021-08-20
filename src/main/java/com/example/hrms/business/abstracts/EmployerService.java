@@ -6,6 +6,7 @@ import com.example.hrms.entities.concretes.Employer;
 import com.example.hrms.entities.dto.EmployerDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployerService {
     Result add(Employer employer);
@@ -14,4 +15,8 @@ public interface EmployerService {
     DataResult<Employer> getById(int id);
     DataResult<List<EmployerDto>> getEmployerDto();
 
+   /* DataResult<List<Employer>> getByIsAcivatedUpdate();
+
+    Map<String, Object> getJson(Employer employer);
+*/
 }
